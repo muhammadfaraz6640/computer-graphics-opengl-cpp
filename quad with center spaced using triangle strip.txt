@@ -1,0 +1,46 @@
+void main(int argc, char** argv)
+{
+	glutInit(&argc, argv);
+	//argc= arg count, specifies no. of arguments
+	//argv=arg values, specifies values of those arguments
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);  //glut_single means 2d view use glut_double for 3d
+	glutInitWindowSize(600, 600);    //size of the main window
+	glutInitWindowPosition(100, 100);   //position of the main window
+	glutCreateWindow("five pixels colorful");  //to create the tilte of window
+	glutDisplayFunc(myDisplay);
+	//glutKeyboardFunc(keyboard);
+	//glutMouseFunc(myMouse);
+	myInit();   //function call  a function which contain all initializations 
+	glutMainLoop();  //hold output just like getch() in c
+}
+void myInit(void)
+{
+	glClearColor(1.0, 1.0, 1.0, 1.0);
+	glColor3f(1.0f, 1.0f, 0.0f);
+	glPointSize(4.0);
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadIdentity();
+	gluOrtho2D(0, 600, 0, 600);
+}
+void myDisplay(void)
+{
+	glClear(GL_COLOR_BUFFER_BIT);
+	glBegin(GL_TRIANGLE_STRIP); 
+	glVertex2i(100, 100);  
+	glVertex2i(150, 150);  
+	glVertex2i(500, 100);    
+	glVertex2i(450, 150); 
+	glVertex2i(500, 500); 
+	glVertex2i(450, 450); 
+	glVertex2i(100, 500);   
+	glVertex2i(150, 450);
+	glVertex2i(100, 100);
+	glVertex2i(150, 150);
+	/*glVertex2i(100, 100);
+	glVertex2i(400, 100);
+	glVertex2i(400, 400);
+	glVertex2i(100, 400);
+	glVertex2i(100, 100 );*/
+	glEnd();
+	glFlush();
+}
