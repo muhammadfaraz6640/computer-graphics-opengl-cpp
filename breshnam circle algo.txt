@@ -1,14 +1,16 @@
 void myInit(void);
 void myDisplay(void);
 void setPixel(int x, int y) { 
-	glBegin(GL_POINTS);  
+	glBegin(GL_POINTS);  //craete point on every x and y value passed
 	glVertex2i(x, y); 
-	glEnd();  glFlush(); }
+	glEnd(); 
+	glFlush(); //tells the compiler to execute all the above commands
+	}
 
 void draw_circle(int p, int q, int x, int y) { 
-	glColor3f(1, 0, 0);  
+	glColor3f(1, 0, 0);     // these are all the circles 8 symettry
 	setPixel(x + p, y + q);
-	glColor3f(0, 1, 0);
+	glColor3f(0, 1, 0);      //every point have different color
 	setPixel(x - p, y + q); 
 	glColor3f(0, 0, 1);  
 	setPixel(x + p, y - q);  
@@ -25,14 +27,19 @@ void draw_circle(int p, int q, int x, int y) {
 }
 
 void bresenham() {
-	int d, r = 100, p = 0, q = r, x = 200, y = 200; 
-	d = 3 - 2 * r;    
-	draw_circle(p, q, x, y);  
-	while (p <= q) {
-		p++;   if (d < 0)
+	int d, r = 100, p = 0, q = r, x = 200, y = 200;  //p and q are the x and y values of initial parameter i-e (0,r)=(p,q)
+	d = 3 - 2 * r;    //initial parameter 
+	draw_circle(p, q, x, y );  
+	while (p <= q) {      
+		p++;   //increment of p for every iteration
+		if (d < 0)
 
-		{ d = d + (4 * p) + 6; }
-		else { q--;    d = d + 4 * (p - q) + 10; }   draw_circle(p, q, x, y);
+		{ d = d + (4 * p) + 6; 
+		}
+		else { q--; //increment of q for iteration if parameter(d) is pos
+		d = d + 4 * (p - q) + 10;
+		} 
+		draw_circle(p, q, x, y);
 	}
 }
 
